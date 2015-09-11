@@ -1,0 +1,17 @@
+{
+    "contents" : "#Jeffrey Uslan\n#fabricate some on-off data\nlen=1000\ngood_vec=round(runif(len,max=.75))\nplot(good_vec)\nnoise=rnorm(len,-.1,.1)\n#give it noise\nnoise_vec=good_vec+noise\nplot(noise_vec)\n\n#introduce some \"step noise\"\nsteps=round(rnorm(20,-1,1))\nt=sapply(steps,function(x) x*rep(1,50))\nsteps_10=NULL\nfor(i in 1:ncol(t)) steps_10=c(steps_10,t[,i])\nstep_noise=noise_vec+steps_10\nplot(step_noise)\n\n#try to fix using moving median\nfilter_window=5\nfilt=runmed((step_noise),filter_window)\n\nplot(filt)\ntitle(\"note the averaging issue between steps\")\nunstep_noise=step_noise-filt\nplot(unstep_noise,type=\"p\")\ntitle(\"attempted adjustments\")\n\n\n#fit a step function fit\ndf=data.frame(x=1:len,y=step_noise)\nfit=lm(df$y~0+cut(df$x,20))\n\nstep_fit=as.vector((coef(summary(fit))[,1]))\nt=sapply(step_fit,function(x) x*rep(1,50))\nsteps_10=NULL\nfor(i in 1:ncol(t)) steps_10=c(steps_10,t[,i])\nunstep_noise_cut=step_noise-steps_10\nplot(unstep_noise_cut)\ntitle(\"much better\")\n\n\npar(mfrow=c(1,1))\nplot(noise_vec)\nplot(unstep_noise,type=\"p\")\nplot(unstep_noise_cut)\n",
+    "created" : 1441506652030.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4020526069",
+    "id" : "C583584D",
+    "lastKnownWriteTime" : 1441506775,
+    "path" : "~/Data_Analysis_Notes/stepwise_correction.R",
+    "project_path" : "stepwise_correction.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

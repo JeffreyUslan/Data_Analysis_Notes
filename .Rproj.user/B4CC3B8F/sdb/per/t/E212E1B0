@@ -1,0 +1,17 @@
+{
+    "contents" : "---\ntitle: \"Stepwise Correction\"\nauthor: \"Jeffrey Uslan\"\ndate: \"Wednesday, July 22, 2015\"\noutput: pdf_document\n---\n\n\n#Fabricate some on-off data\n```{r}\nlen=1000\ngood_vec=round(runif(len,max=.75))\nplot(good_vec)\n```\n\n#Give it noise\n```{r}\nnoise=rnorm(len,-.1,.1)\nnoise_vec=good_vec+noise\nplot(noise_vec)\n```\n\n#Introduce some \"step noise\"\n```{r}\nsteps=round(rnorm(20,-1,1))\nt=sapply(steps,function(x) x*rep(1,50))\nsteps_10=NULL\nfor(i in 1:ncol(t)) steps_10=c(steps_10,t[,i])\nstep_noise=noise_vec+steps_10\nplot(step_noise)\n```\n\n#Try to fix using moving median\n```{r}\nfilter_window=5\nfilt=runmed((step_noise),filter_window)\n\nplot(filt)\ntitle(\"Note the averaging issue between steps\")\nunstep_noise=step_noise-filt\nplot(unstep_noise,type=\"p\")\ntitle(\"Attempted adjustments\")\n```\n\n#Fit a step function fit\n```{r}\ndf=data.frame(x=1:len,y=step_noise)\nfit=lm(df$y~0+cut(df$x,20))\n\nstep_fit=as.vector((coef(summary(fit))[,1]))\nt=sapply(step_fit,function(x) x*rep(1,50))\nsteps_10=NULL\nfor(i in 1:ncol(t)) steps_10=c(steps_10,t[,i])\nplot(steps_10)\nunstep_noise_cut=step_noise-steps_10\nplot(unstep_noise_cut)\ntitle(\"Much better\")\n```\n\n\n```{r}\npar(mfrow=c(3,1))\nplot(noise_vec)\nplot(unstep_noise,type=\"p\")\nplot(unstep_noise_cut)\n```",
+    "created" : 1441506653261.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "26091342",
+    "id" : "E212E1B0",
+    "lastKnownWriteTime" : 1441506928,
+    "path" : "~/Data_Analysis_Notes/stepwise_correction.Rmd",
+    "project_path" : "stepwise_correction.Rmd",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "type" : "r_markdown"
+}

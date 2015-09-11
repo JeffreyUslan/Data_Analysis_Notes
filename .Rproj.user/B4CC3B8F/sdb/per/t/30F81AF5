@@ -1,0 +1,18 @@
+{
+    "contents" : "---\ntitle: \"Data Analysis Notes\"\nauthor: \"Jeffrey Uslan\"\ndate: \"Sunday, July 26, 2015\"\noutput: pdf_document\n---\n\n\n#Statistical Inference\n\n##Interval Estimate\n1. Compare point estimate to known distribution (normal or t). x+-z(or t)*sd(distribution)\n\n##Hypothesis Testing\n1. z=(x-mu)/s_x, s_x=sd/sqrt(n)\n2. p-value is the probability of that z-score within the distribution\n\n##Distribution comparison\n1. T-Test\n  * Test if the mean of two distributions are equal\n2. ANOVA\n  * Test if the mean of two or more distributions are equal\n3. Chi-square\n  * Test if the distribution of categoricals in two distributions are equal\n\n#Exploration\n\n##General behavior basic\n * Summary Stats\n * Histograms\n * Box plots\n\n##Unsupervised Learning \n * Hierarchical clustering\n * PCA [prcomp]\n * K-means clustering\n\n##Trend finding\n * Auto-Correlation Function\n * Cross-correlation Function\n * Plot first difference\n * Moving Averages\n * Kernel smoothing (weight moving averages)\n * k-Nearest neighbors\n * Locally weighted estimates\n * Spline (Window regression)\n * Fourier Analysis/ Periodogram \n * must not have linear trend or be de-trended\n\n##Cleaning\n * Denoising\n * SVD denoising\n * Moving window filter\n * Outlier Detection\n * Mahalanobis distance \n * Single Variable standard deviations\n\n##Impution \n * Single point averaging\n * k-means \n\n#Modeling\n\n##Model Choice\n\n * Quantitative Prediction\n  * Linear regression [lm] - Assumptions:\n    * Linear relationship.\n    * Residual normality. \n    * No or little multicollinearity. Correlated variables.\n    * No autocorrelation. Values are not time dependant.\n    * Homoscedasticity. Variance of residuals is unrelated to index.\n  * Polynomial regression\n\n * Qualitative Classification\n  * Logistic Regression. \n    *1/(1+e^(-t))\n  * K-nearest neighbors classifier\n  * Naive Bayes [nb]\n  * Linear Discriminant Analysis [lda]\n  * Decision Trees [rpart], Random Forests [rf]\n  * SVM\n    * Maximal Margin Classifier\n      * exact hyperplane separation\n    * support vector classifier\n      * inexact hyperplane separation\n    * support vector machine\n      * non-linear “hyperplane” separation\n\n * Time Series\n  * Seasonal Decomposition\n  * Autoregression\n  * step function fits\n  * Trig fits\n\n##Model Correction\n  * Subset Selection\n    * Stepwise\n    * Correlation cutoff\n    * fractal dimension impact\n  * Shrinkage\n    * Ridge regularization (L1)\n      * Suppresses coefficient\n    * Lasso (L2)\n      * Allows suppression to zero\n  * Dimension reduction\n    * principal components\n  * Bootstrapping\n  \n##Model Selection and Validation\n  * Cross Validation\n    * Leave one out\n    * k-folds\n  * Quantitative Prediction\n    * MSE\n  * Qualitative Classification \n    * ROC Curves\n",
+    "created" : 1437968510815.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1174956035",
+    "id" : "30F81AF5",
+    "lastKnownWriteTime" : 1437969656,
+    "path" : "~/Data_Analysis_Notes/Data.Rmd",
+    "project_path" : "Data.Rmd",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 0,
+    "source_on_save" : false,
+    "type" : "r_markdown"
+}

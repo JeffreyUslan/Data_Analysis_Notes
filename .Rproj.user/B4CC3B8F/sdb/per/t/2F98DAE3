@@ -1,0 +1,18 @@
+{
+    "contents" : "\nlen=1000\n\n#time indicator\nx=seq(1:len)\ntime     <- 1\nw        <- 2*pi/time\nts       <- seq(time/len,time,1/len)\n#simple noise\nnoise=rnorm(len,mean=0,sd=.3)\n#heteroscedastic noise\n#sinusoidals\nsin_1=sin(1*w*ts)\nsin_2=(1/2)*sin(6*w*ts)\nsin_4=(1/3)*sin(26*w*ts)\nsin_8=(1/4)*sin(133*w*ts)\nclean_period=sin_1+sin_2+sin_4+sin_8\nplot(clean_period)\n\nvar_pres=sin_1+sin_2+sin_4+sin_8+noise+.01*x\nfinal_sim=var_pres+c(rep(0,1),var_pres[2:len])+c(rep(0,2),var_pres[3:len])+c(rep(0,3),var_pres[4:len])\n\n\nplot(final_sim)\nlm_model=lm(final_sim~x)\nline_fit=predict(lm_model)\nlines(line_fit,col=\"yellow\")\n#remove linear trend\nclean_1=final_sim-line_fit\nplot(clean_1)\nfilt_1=filter(clean_1,rep(1/2,2))\nfilt_2=filter(clean_1,rep(1/4,4))\nfilt_3=filter(clean_1,rep(1/8,8))\nfilt_4=filter(clean_1,rep(1/16,16))\nfilt_5=filter(clean_1,rep(1/32,32))\n\nlines(filt_1,col=\"red\")\nlines(filt_2,col=\"green3\")\nlines(filt_3,col=\"blue\")\nlines(filt_4,col=\"cyan\")\nlines(filt_5,col=\"magenta\")\n\n#ACF diagnostics\nacf(na.omit(filt_1))\n\n\n#FFT exploration\nX.hold=Mod(fft(na.omit(clean_1)))\nX.hold=X.hold[1:length(X.hold)/2]\nplot(X.hold)\nordered_ind=order(X.hold,decreasing=TRUE)\nhead(ordered_ind,n=10)\n\n#fit model with suspected sinusoids\n\n\n\n",
+    "created" : 1441507542919.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3831726127",
+    "id" : "2F98DAE3",
+    "lastKnownWriteTime" : 1441638919,
+    "path" : "~/Data_Analysis_Notes/time_serires_exploration.R",
+    "project_path" : "time_serires_exploration.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
